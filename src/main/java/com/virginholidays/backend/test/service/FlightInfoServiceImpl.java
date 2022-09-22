@@ -34,7 +34,7 @@ public class FlightInfoServiceImpl implements FlightInfoService {
          return flightInfoRepository.findAll().thenApply(allList -> {
                  return Optional.of(allList.get().stream()
                          .filter(flight -> flight.days().contains(outboundDate.getDayOfWeek()))
-                         .toList().stream().sorted(Comparator.comparing(Flight::destination))
+                         .toList().stream().sorted(Comparator.comparing(Flight::departureTime))
                          .toList());
         });
     }

@@ -68,8 +68,8 @@ class FlightInfoServiceImplTest {
         assertThat(maybeFlights.isPresent(), equalTo(true));
         assertThat(maybeFlights.get().size(), equalTo(3));
         assertThat(maybeFlights.get().get(0).destination(), equalTo("Antigua"));
-        assertThat(maybeFlights.get().get(1).destination(), equalTo("Dubai"));
-        assertThat(maybeFlights.get().get(2).destination(), equalTo("Las Vegas"));
+        assertThat(maybeFlights.get().get(1).destination(), equalTo("Las Vegas"));
+        assertThat(maybeFlights.get().get(2).destination(), equalTo("Dubai"));
     }
 
     private Optional<List<Flight>> fligthData() {
