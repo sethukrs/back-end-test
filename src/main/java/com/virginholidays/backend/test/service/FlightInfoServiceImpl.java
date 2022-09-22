@@ -3,6 +3,7 @@ package com.virginholidays.backend.test.service;
 import com.virginholidays.backend.test.api.Flight;
 import com.virginholidays.backend.test.repository.FlightInfoRepository;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
@@ -30,7 +31,11 @@ public class FlightInfoServiceImpl implements FlightInfoService {
     @Override
     public CompletionStage<Optional<List<Flight>>> findFlightByDate(LocalDate outboundDate) {
 
-        // FIXME - applicant to complete
-        return flightInfoRepository.findAll();
+         return flightInfoRepository.findAll().thenApply(allList -> {
+                 return Optional.of(allList.get().stream()
+                         .filter(flight -> flight.days().contains(outboundDate.getDayOfWeek()))
+                         .toList().stream().sorted(Comparator.comparing(Flight::destination))
+                         .toList());
+        });
     }
 }
